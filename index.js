@@ -5,7 +5,7 @@ http.createServer(async function (req, res) {
     //console.log(`Just got a request at ${req.url}!`)
     let {rows:data} = await getData();
 
-    console.log(`got ${data.length} rows`);
+    //console.log(`got ${data.length} rows`);
 
     let today = new Date();
     let numberOfDaysToAdd = 2;
@@ -16,7 +16,7 @@ http.createServer(async function (req, res) {
     futureDate.setSeconds(59);
     //futureDate = new Date(futureDate);
 
-    console.log(`future date cut-off is ${ new Date(futureDate) }`);
+    //console.log(`future date cut-off is ${ new Date(futureDate) }`);
 
     let occDate;
 
@@ -27,13 +27,13 @@ http.createServer(async function (req, res) {
         occDate.setHours(0);
         occDate.setMinutes(0);
         occDate.setSeconds(0);
-        console.log(`occ date is ${ new Date(occDate) }`);
-        return occDate <= futureDate;
+        //console.log(`occ date is ${ new Date(occDate) }`);
+        return (occDate > new Date()) && (occDate <= futureDate);
     });
 
     if( msgData.length ) {
 
-        console.log(`have ${msgData.length} upcoming bdays etc`);
+        //console.log(`have ${msgData.length} upcoming bdays etc`);
 
         let emailData = msgData.map(r => {
             return `<li>${r.Month} ${r.Day} - ${r.Occasion} of ${r.Name} (${r.Relation})</li>`;
@@ -41,7 +41,7 @@ http.createServer(async function (req, res) {
 
         let emailHtml = `<ul>${emailData.join(' ')}</ul>`;
 
-        console.log(emailHtml);
+        //console.log(emailHtml);
 
         const transporter = nodemailer.createTransport({
             service: 'gmail',
@@ -67,7 +67,7 @@ http.createServer(async function (req, res) {
             }
         });
     
-        res.write('Email sent');
+        res.write('E-mail sent');
         res.end();
 
     }  // if( msgData.length )
