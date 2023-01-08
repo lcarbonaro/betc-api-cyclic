@@ -3,7 +3,7 @@ const nodemailer = require('nodemailer');
 
 http.createServer(async function (req, res) {
     //console.log(`Just got a request at ${req.url}!`)
-    let data = await getData();
+    let {rows:data} = await getData();
 
     let today = new Date();
     let numberOfDaysToAdd = 3;
