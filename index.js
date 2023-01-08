@@ -3,31 +3,34 @@ http.createServer(function (req, res) {
     console.log(`Just got a request at ${req.url}!`)
 
 
-    const sgMail = require('@sendgrid/mail');
-    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-    const msg = {
+    const nodemailer = require('nodemailer');
+
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: process.env.FROM_EMAIL,
+            pass: process.env.NODEMAILER_GMAIL_APP_PWD
+        }
+    });
+
+    const mailOptions = {
+        from: process.env.FROM_EMAIL,
         to: process.env.TO_EMAIL,
-        from: process.env.FROM_EMAIL, // Use the email address or domain you verified above
-        subject: 'Sending with Twilio SendGrid is Fun',
-        text: 'and easy to do anywhere, even with Node.js',
-        html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+        subject: 'Subject',
+        text: 'Email content'
     };
 
-    //ES8
-    (async () => {
-        try {
-            await sgMail.send(msg);
-        } catch (error) {
-            console.error(error);
-
-            if (error.response) {
-                console.error(error.response.body)
-            }
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+            // do something useful
         }
-    })();
+    });
 
 
-    res.write('Yo!');
+    res.write('YoGee!');
     res.end();
-    
+
 }).listen(process.env.PORT || 3000);
