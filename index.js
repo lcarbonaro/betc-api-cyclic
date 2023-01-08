@@ -61,15 +61,15 @@ http.createServer(async function (req, res) {
     
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
-                console.log(error);
+                console.log('**** ERROR SENDING E-MAIL ****');
+                res.write(error);
+                res.end();
             } else {
-                console.log('Email sent: ' + info.response);
-                // do something useful
+                console.log('E-mail sent: ' + info.response);
+                res.write('E-mail sent: ' + info.response);
+                res.end();
             }
-        });
-    
-        res.write('E-mail sent');
-        res.end();
+        });        
 
     }  // if( msgData.length )
 
