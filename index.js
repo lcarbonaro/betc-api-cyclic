@@ -1,9 +1,8 @@
-var http = require('http');
+const http = require('http');
+const nodemailer = require('nodemailer');
+
 http.createServer(function (req, res) {
-    console.log(`Just got a request at ${req.url}!`)
-
-
-    const nodemailer = require('nodemailer');
+    console.log(`Just got a request at ${req.url}!`)    
 
     const transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -16,8 +15,8 @@ http.createServer(function (req, res) {
     const mailOptions = {
         from: process.env.FROM_EMAIL,
         to: process.env.TO_EMAIL,
-        subject: 'Subject',
-        text: 'Email content'
+        subject: 'WHATEVER Subject',
+        text: 'SOME whatever Email content'
     };
 
     transporter.sendMail(mailOptions, function (error, info) {
@@ -29,8 +28,7 @@ http.createServer(function (req, res) {
         }
     });
 
-
-    res.write('YoGee!');
+    res.write('YoGee2!');
     res.end();
 
 }).listen(process.env.PORT || 3000);
