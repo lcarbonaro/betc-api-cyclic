@@ -31,9 +31,9 @@ http.createServer(async function (req, res) {
         return (occDate > new Date()) && (occDate <= futureDate);
     });
 
-    if( msgData.length ) {
+    console.log(`have ${msgData.length} upcoming bdays etc between now and ${new Date(futureDate)}`);
 
-        //console.log(`have ${msgData.length} upcoming bdays etc`);
+    if( msgData.length ) {        
 
         let emailData = msgData.map(r => {
             return `<li>${r.Month} ${r.Day} - ${r.Occasion} of ${r.Name} (${r.Relation})</li>`;
