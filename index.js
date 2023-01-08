@@ -53,7 +53,7 @@ http.createServer(async function (req, res) {
     
         const mailOptions = {
             from: process.env.FROM_EMAIL,
-            to: process.env.TO_EMAIL,
+            to: [process.env.TO_EMAIL_1,process.env.TO_EMAIL_2],
             subject: 'Upcoming Birthdays Etc.',
             html: emailHtml
         };
