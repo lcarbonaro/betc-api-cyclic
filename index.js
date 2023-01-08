@@ -8,7 +8,7 @@ http.createServer(async function (req, res) {
     console.log(`got ${data.length} rows`);
 
     let today = new Date();
-    let numberOfDaysToAdd = 3;
+    let numberOfDaysToAdd = 2;
     let futureDate = today.setDate(today.getDate() + numberOfDaysToAdd);    
     futureDate = new Date(futureDate);
     futureDate.setHours(23);
