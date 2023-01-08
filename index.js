@@ -39,7 +39,8 @@ http.createServer(async function (req, res) {
             return `<li>${r.Month} ${r.Day} - ${r.Occasion} of ${r.Name} (${r.Relation})</li>`;
         });
 
-        let emailHtml = `<ul>${emailData.join(' ')}</ul>`;
+        let emailHtml = `<p>Upcoming:</p><ul>${emailData.join(' ')}</ul>`;
+        emailHtml += `<br/><p>For more upcoming occasions, check out <a href="https://birthdaysetc.vercel.app/">Birthdays Etc.</a>.</p>`;
 
         //console.log(emailHtml);
 
