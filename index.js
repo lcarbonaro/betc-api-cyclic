@@ -1,8 +1,30 @@
 const http = require('http');
 const nodemailer = require('nodemailer');
 
-http.createServer(function (req, res) {
-    console.log(`Just got a request at ${req.url}!`)    
+http.createServer(async function (req, res) {
+    console.log(`Just got a request at ${req.url}!`)
+
+    let resp = await fetch("https://birthdaysetc.vercel.app/api/getNext?id=1yTj5mU3EnR4AesESbDNOEU3B0GV8Nox_z0PnkSgHxpw&integers=false&columns=false&sheet=1&q=", {
+        "headers": {
+            "accept": "*/*",
+            "accept-language": "en-US,en;q=0.9",
+            "sec-ch-ua": "\"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"108\", \"Google Chrome\";v=\"108\"",
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": "\"Windows\"",
+            "sec-fetch-dest": "empty",
+            "sec-fetch-mode": "cors",
+            "sec-fetch-site": "same-origin",
+            "x-requested-with": "XMLHttpRequest",
+            "Referer": "https://birthdaysetc.vercel.app/",
+            "Referrer-Policy": "strict-origin-when-cross-origin"
+        },
+        "body": null,
+        "method": "GET"
+    });
+
+    let respJson = await resp.json();
+
+    console.table(respJson);
 
     const transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -15,8 +37,8 @@ http.createServer(function (req, res) {
     const mailOptions = {
         from: process.env.FROM_EMAIL,
         to: process.env.TO_EMAIL,
-        subject: 'WHATEVER Subject',
-        text: 'SOME whatever Email content'
+        subject: 'WHATEVER Subject test2',
+        text: 'SOME whatever Email content test2'
     };
 
     transporter.sendMail(mailOptions, function (error, info) {
