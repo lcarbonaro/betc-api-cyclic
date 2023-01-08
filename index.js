@@ -10,6 +10,7 @@ http.createServer(async function (req, res) {
     let today = new Date();
     let numberOfDaysToAdd = 3;
     let futureDate = today.setDate(today.getDate() + numberOfDaysToAdd);    
+    futureDate = new Date(futureDate);
     futureDate.setHours(23);
     futureDate.setMinutes(59);
     futureDate.setSeconds(59);
